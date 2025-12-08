@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  ray-head:
+    image: "rayproject/ray"
+    ports:
+      - "8888:8888" # 
+      - "6379:6379" # redis port
+      - "10001:10001" # ray client port connection
+      - "8265:8265" # ray dashboard
+    shm_size: 2g
+    command: bash -c "ray start --head --port=6379 --block"
+    networks:
+      - ray_net
+    
+  ray-worker:
+    image: "rayproject/ray" 
+    shm_size: 2g
+    command: bash -c "ray start --address=ray-head:6379 --block"
+    deploy:
+      mode: replicated
+      replicas: 1
+    networks:
+      - ray_net
+
+networks:
+  ray_net:
