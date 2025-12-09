@@ -7,7 +7,7 @@ import math
 import random
 
 NUM_TASK = 10
-NUM_SAMPLES_PER_TASK = 10_000_000
+NUM_SAMPLES_PER_TASK = 20_000_000
 TOTAL_NUM_SAMPLES = NUM_TASK * NUM_SAMPLES_PER_TASK
 
 # An actor in ray is stateful worker process that can store and update
